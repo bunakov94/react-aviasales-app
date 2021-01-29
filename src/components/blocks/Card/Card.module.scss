@@ -1,0 +1,44 @@
+@import '../../../assets/scss/vars';
+
+.card {
+  padding: 10px 20px;
+  width: calc(100vw - 40px);
+  display: flex;
+  background: $white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  flex-direction: column;
+
+  &Header {
+    display: flex;
+    justify-content: space-between;
+    &__price {
+      margin: 0;
+      font-size: 24px;
+      color: $blue;
+    }
+    &__label {
+      object-fit: cover;
+      width: 110px;
+      height: 36px;
+    }
+  }
+
+  &Coll {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &Row {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    &__header {
+      font-size: 12px;
+      color: $gray;
+    }
+    &__footer {
+      font-size: 14px;
+    }
+  }
+}

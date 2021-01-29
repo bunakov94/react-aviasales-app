@@ -1,0 +1,71 @@
+@import '../../../assets/scss/vars';
+
+.filter {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 10px;
+  background: $white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+
+  &__title {
+    padding: 20px 20px 10px 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+.item {
+  padding: 10px 20px;
+  font-size: 13px;
+  position: relative;
+  display: flex;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $lightBlue;
+  }
+
+  &Input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  &Checkmark {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: 1px solid $borderColor;
+    box-sizing: border-box;
+    border-radius: 2px;
+  }
+
+  &Input:checked + &Checkmark {
+    background: url('../../../assets/images/shape.svg') center no-repeat;
+  }
+  &Input:focus + &Checkmark {
+    border-radius: 2px;
+    border: 2px solid $blue;
+  }
+  &Input:disabled + &Checkmark {
+    border-radius: 2px;
+    border: 1px solid $borderColor;
+  }
+  &Input:checked:disabled + &Checkmark {
+    border-radius: 2px;
+    border: 1px solid $borderColor;
+    background: url('../../../assets/images/shape-silver.svg') center no-repeat;
+  }
+
+  &Label {
+    padding-left: 10px;
+  }
+}

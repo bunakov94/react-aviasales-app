@@ -1,0 +1,44 @@
+@import '../../../assets/scss/vars';
+
+.tabs {
+  width: 100%;
+  display: flex;
+}
+
+.label {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 15px 10px;
+  background: $white;
+  border: 1px solid $borderColorLight;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:first-child {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border-right: none;
+  }
+  &:last-child {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-left: none;
+  }
+
+  &:hover {
+    background-color: $blue;
+    color: $white;
+  }
+
+  &__active {
+    background: $blue;
+    color: $white;
+  }
+}
+
+.input {
+  appearance: none;
+}
