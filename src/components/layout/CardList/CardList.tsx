@@ -1,22 +1,34 @@
 import React from 'react';
-import './CardList.module.scss';
+import classes from './CardList.module.scss';
 import Card from '../../blocks/Card';
 
 const CardList = () => (
-  <ul style={{ listStyle: 'none' }}>
+  <ul className={classes.cardList} style={{ listStyle: 'none', width: '100%', marginBottom: '20px' }}>
     <li style={{ marginTop: '20px' }}>
       <Card />
     </li>
     <li style={{ marginTop: '20px' }}>
       <Card />
     </li>
-    <li style={{ margin: '20px 0' }}>
+    <li style={{ marginTop: '20px' }}>
       <Card />
     </li>
-    <li style={{ margin: '20px 0' }}>
+    <li style={{ marginTop: '20px' }}>
       <Card />
     </li>
-    <li style={{ margin: '20px 0' }}>
+    <li style={{ marginTop: '20px' }}>
+      <Card />
+    </li>
+    <li style={{ marginTop: '20px' }}>
+      <Card />
+    </li>
+    <li style={{ marginTop: '20px' }}>
+      <Card />
+    </li>
+    <li style={{ marginTop: '20px' }}>
+      <Card />
+    </li>
+    <li style={{ marginTop: '20px' }}>
       <Card />
     </li>
   </ul>

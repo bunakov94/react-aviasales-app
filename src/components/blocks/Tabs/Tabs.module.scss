@@ -3,6 +3,10 @@
 .tabs {
   width: 100%;
   display: flex;
+
+  @media screen and (min-width: 768px) {
+    margin: 0;
+  }
 }
 
 .label {
@@ -18,11 +22,11 @@
   transition: background-color 0.3s ease;
   box-sizing: border-box;
 
-  &:first-child {
+  &:first-of-type {
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
   }
-  &:last-child {
+  &:last-of-type {
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
   }
