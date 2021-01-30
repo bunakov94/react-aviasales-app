@@ -4,7 +4,7 @@ import classes from './Header.module.scss';
 
 const Header = () => (
   <header className={classes.pageHeader}>
-    <img src={Logo} alt='Logo' className={classes.pageHeader__logo} />
+    <img src={Logo} alt="Logo" className={classes.pageHeader__logo} width="82" height="89" />
   </header>
 );
 
