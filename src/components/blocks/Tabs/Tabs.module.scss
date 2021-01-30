@@ -19,6 +19,7 @@
   padding: 15px 10px;
   background: $white;
   cursor: pointer;
+  border: 2px solid transparent;
   transition: background-color 0.3s ease;
   box-sizing: border-box;
 
@@ -35,11 +36,6 @@
     background-color: $blue;
     color: $white;
   }
-
-  &__active {
-    background: $blue;
-    color: $white;
-  }
 }
 
 .input {
@@ -50,5 +46,10 @@
     border: 2px solid $blue;
     background-color: $white;
     color: $blue;
+  }
+
+  &:checked + .label {
+    background: $blue;
+    color: $white;
   }
 }
