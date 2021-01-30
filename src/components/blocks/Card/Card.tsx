@@ -6,7 +6,7 @@ const Card = () => (
   <div className={classes.card}>
     <div className={classes.cardHeader}>
       <h2 className={classes.cardHeader__price}>13 400p</h2>
-      <img src={Logo} alt="logo" />
+      <img src={Logo} alt="logo" height="36px" width="110px" />
     </div>
     <div className={classes.cardColl}>
       <div className={classes.cardRow}>
