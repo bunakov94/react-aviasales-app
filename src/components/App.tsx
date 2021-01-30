@@ -1,4 +1,5 @@
 import React from 'react';
+import 'focus-visible';
 import Header from './layout/Header';
 import Filter from './blocks/Filter';
 import Tabs from './blocks/Tabs';

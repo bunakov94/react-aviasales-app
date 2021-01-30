@@ -3,13 +3,13 @@ import classes from './Tabs.module.scss';
 
 const Tabs = () => (
   <div className={classes.tabs}>
-    <label className={`${classes.label} ${classes.label__active}`}>
+    <input type="radio" className={classes.input} name="radio" aria-label="radio-button" />
+    <label htmlFor="radio" className={`${classes.label} ${classes.label__active}`}>
       Самый дешевый
-      <input type="radio" className={classes.input} />
     </label>
-    <label className={classes.label}>
+    <input type="radio" className={classes.input} name="radio2" aria-label="radio-button" />
+    <label htmlFor="radio2" className={classes.label}>
       Самый быстрый
-      <input type="radio" className={classes.input} />
     </label>
   </div>
 );

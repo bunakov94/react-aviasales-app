@@ -51,7 +51,7 @@
   &Input:checked + &Checkmark {
     background: url('../../../assets/images/shape.svg') center no-repeat;
   }
-  &Input:focus + &Checkmark {
+  &Input:focus-visible + &Checkmark {
     border-radius: 2px;
     border: 2px solid $blue;
   }

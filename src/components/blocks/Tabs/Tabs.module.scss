@@ -14,18 +14,17 @@
   line-height: 20px;
   padding: 15px 10px;
   background: $white;
-  border: 1px solid $borderColorLight;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  box-sizing: border-box;
+
   &:first-child {
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
-    border-right: none;
   }
   &:last-child {
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
-    border-left: none;
   }
 
   &:hover {
@@ -41,4 +40,11 @@
 
 .input {
   appearance: none;
+  box-sizing: border-box;
+
+  &:focus-visible + .label {
+    border: 2px solid $blue;
+    background-color: $white;
+    color: $blue;
+  }
 }
