@@ -17,6 +17,10 @@ const reducer = (
         filters: {
           ...state.filters,
           all: action.payload,
+          nothing: action.payload,
+          one: action.payload,
+          two: action.payload,
+          three: action.payload,
         },
       };
     case 'NOTHING':
