@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import classes from './Filter.module.scss';
 
-import * as actions from '../../../store/actions';
+import * as actions from '../../../actions/actions';
 
 const Filter = ({ filters, all, nothing, one, two, three }: any) => {
   useEffect(() => {

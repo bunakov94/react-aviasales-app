@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './store/reducer';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers/rootReducer';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
-const store = createStore(reducer);
+// @ts-ignore
+const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+const composeEnhancers = typeof window === 'object' && reduxDevTools ? reduxDevTools({}) : compose;
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <React.StrictMode>
