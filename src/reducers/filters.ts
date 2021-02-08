@@ -1,9 +1,21 @@
+type Filters = {
+  [key: string]: { type: string; title: string; checked: boolean };
+};
+
+enum FilterTypes {
+  ALL = 'ALL',
+  NOTHING = 'NOTHING',
+  ONE = 'ONE',
+  TWO = 'TWO',
+  THREE = 'THREE',
+}
+
 const checkFunk = (state: Filters, type: string) => {
-  const filterName = type.toLowerCase();
+  const filtersCountExeptAll = Object.keys(state).length - 1;
   const result = {
     ...state,
-    [filterName]: { ...state[filterName], checked: !state[filterName].checked },
-    all: { ...state.all, checked: false },
+    [type]: { ...state[type], checked: !state[type].checked },
+    [FilterTypes.ALL]: { ...state[FilterTypes.ALL], checked: false },
   };
 
   let count = 0;
@@ -13,9 +25,9 @@ const checkFunk = (state: Filters, type: string) => {
     }
   }
 
-  if (filterName === 'all' || count === 4) {
+  if (type === FilterTypes.ALL || count === filtersCountExeptAll) {
     return Object.keys(state).reduce((acc: Filters, el) => {
-      acc[el] = { ...state[el], checked: !state.all.checked };
+      acc[el] = { ...state[el], checked: !state[FilterTypes.ALL].checked };
       return acc;
     }, {});
   }
@@ -25,31 +37,16 @@ const checkFunk = (state: Filters, type: string) => {
 
 export default function filters(
   state: Filters = {
-    all: { type: 'ALL', title: 'Все', checked: false },
-    nothing: { type: 'NOTHING', title: 'Без пересадок', checked: false },
-    one: { type: 'ONE', title: '1 пересадка', checked: false },
-    two: { type: 'TWO', title: '2 пересадка', checked: false },
-    three: { type: 'THREE', title: '3 пересадка', checked: false },
+    [FilterTypes.ALL]: { type: FilterTypes.ALL, title: 'Все', checked: false },
+    [FilterTypes.NOTHING]: { type: FilterTypes.NOTHING, title: 'Без пересадок', checked: false },
+    [FilterTypes.ONE]: { type: FilterTypes.ONE, title: '1 пересадка', checked: false },
+    [FilterTypes.TWO]: { type: FilterTypes.TWO, title: '2 пересадка', checked: false },
+    [FilterTypes.THREE]: { type: FilterTypes.THREE, title: '3 пересадка', checked: false },
   },
   action: { type: string },
 ) {
-  switch (action.type) {
-    case 'ALL':
-      return checkFunk(state, action.type);
-    case 'NOTHING':
-      return checkFunk(state, action.type);
-    case 'ONE':
-      return checkFunk(state, action.type);
-    case 'TWO':
-      return checkFunk(state, action.type);
-    case 'THREE':
-      return checkFunk(state, action.type);
-
-    default:
-      return state;
+  if (Object.keys(FilterTypes).includes(action.type)) {
+    return checkFunk(state, action.type);
   }
+  return state;
 }
-
-type Filters = {
-  [key: string]: { type: string; title: string; checked: boolean };
-};
