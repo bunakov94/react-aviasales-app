@@ -13,25 +13,23 @@ const CardList = ({ getTickets }: any) => {
     const fetchData = () => {
       if (searchId === '') {
         aviasalesAPI.getSearchId().then(async (res) => setSearchId(res.searchId));
-      } else {
+      } else if (!stop) {
         aviasalesAPI
           .getTickets(searchId)
           .then((res) => {
             setStop(res.stop);
-            if (res.stop === stop) {
-              console.log(res.tickets, res.stop);
-              getTickets(res.tickets);
-            }
+            console.log(res.tickets, res.stop);
+            getTickets(res.tickets);
           })
           .catch((error) => {
             console.log(error);
+            if (!stop) {
+              fetchData();
+            }
           });
       }
     };
     fetchData();
-    return () => {
-      setStop(true);
-    };
   });
 
   // useEffect(
