@@ -1,14 +1,4 @@
-type Filters = {
-  [key: string]: { type: string; title: string; checked: boolean };
-};
-
-enum FilterTypes {
-  ALL = 'ALL',
-  NOTHING = 'NOTHING',
-  ONE = 'ONE',
-  TWO = 'TWO',
-  THREE = 'THREE',
-}
+import { FilterTypes, Filters } from '../helpers/types';
 
 const checkFunk = (state: Filters, type: string) => {
   const filtersCountExeptAll = Object.keys(state).length - 1;

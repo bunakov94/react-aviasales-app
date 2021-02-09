@@ -8,8 +8,7 @@ export default class AviasalesAPI {
   async getResources(url: string) {
     const res = await fetch(`${this.API_BASE_URL}${url}`);
     if (!res.ok) {
-      // throw new Error(`Could not fetch ${url}, received ${res.status}`);
-      console.log('error');
+      throw new Error(`Could not fetch ${url}, received ${res.status}`);
     }
     return res.json();
   }

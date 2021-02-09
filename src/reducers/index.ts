@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import filters from './filters';
-import searchId from './searchId';
+import tickets from './tickets';
 
-const rootReducer = combineReducers({ filters, searchId });
+const rootReducer = combineReducers({ filters, tickets });
 
 export default rootReducer;
