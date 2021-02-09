@@ -1,18 +1,4 @@
-export function getSearchIdSuccess(id: any) {
-  return {
-    type: 'SET_SEARCH_ID',
-    id,
-  };
-}
+// eslint-disable-next-line import/prefer-default-export
+export const getSearchId = (payload: string) => ({ type: 'SET_SEARCH_ID', payload });
 
-export function getSearchId() {
-  return async (dispatch: any) => {
-    try {
-      const res = await fetch('https://front-test.beta.aviasales.ru/search');
-      const result = await res.json();
-      dispatch(getSearchIdSuccess(result.searchId));
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  };
-}
+export const getTickets = (payload: []) => ({ type: 'GET_TICKETS', payload });
