@@ -9,6 +9,7 @@ export interface ITicket {
   price: number;
   carrier: string;
   segments: ISegment[];
+  id: string;
 }
 
 export type Filters = {
@@ -26,6 +27,8 @@ export enum FilterTypes {
 export interface ICardListProps {
   getTickets: (payload: ITicket[]) => { type: string; payload: ITicket[] };
   tickets: ITicket[];
+  filters: Filters;
+  activeTab: any;
 }
 
 export interface IFilterProps {
@@ -35,4 +38,15 @@ export interface IFilterProps {
 
 export interface CardProps {
   ticket: ITicket;
+}
+
+export interface ITabsProps {
+  activeTab: any;
+  setActiveTab: any;
+}
+
+export interface IState {
+  filters: Filters;
+  tickets: ITicket[];
+  activeTab: any;
 }
