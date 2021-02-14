@@ -28,7 +28,7 @@ const checkFunk = (state: Filters, type: string) => {
 export default function filters(
   state: Filters = {
     [FilterTypes.ALL]: { type: FilterTypes.ALL, title: 'Все', checked: false },
-    [FilterTypes.NOTHING]: { type: FilterTypes.NOTHING, title: 'Без пересадок', checked: false },
+    [FilterTypes.NOTHING]: { type: FilterTypes.NOTHING, title: 'Без пересадок', checked: true },
     [FilterTypes.ONE]: { type: FilterTypes.ONE, title: '1 пересадка', checked: false },
     [FilterTypes.TWO]: { type: FilterTypes.TWO, title: '2 пересадка', checked: false },
     [FilterTypes.THREE]: { type: FilterTypes.THREE, title: '3 пересадка', checked: false },

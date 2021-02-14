@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { nanoid } from 'nanoid';
+import Spiner from '../../blocks/Loader';
 import AviasalesAPI from '../../../helpers/AviasalesAPI';
 import * as action from '../../../actions/tickets';
 import { ITicket, ICardListProps, IState, Filters, FilterTypes } from '../../../helpers/types';
@@ -8,67 +9,93 @@ import classes from './CardList.module.scss';
 import Card from '../../blocks/Card';
 
 const CardList = ({ getTickets, tickets, filters, activeTab }: ICardListProps) => {
-  const aviasalesAPI = new AviasalesAPI();
-  const [searchId, setSearchId] = useState('');
-  const [stopFetching, setStopFetching] = useState(false);
+  const aviasalesAPI = useMemo(() => new AviasalesAPI(), []);
+  const [isLoading, setIsLoading] = useState(false);
   const ticketsToShow = 5;
+  const [showCount, setShowCount] = useState(ticketsToShow);
 
   useEffect(() => {
-    const fetchData = () => {
-      if (searchId === '') {
-        aviasalesAPI.getSearchId().then((res) => setSearchId(res.searchId));
-      } else if (!stopFetching) {
-        aviasalesAPI
-          .getTickets(searchId)
-          .then((res) => {
-            setStopFetching(res.stop);
-            for (const ticket of res.tickets) {
-              ticket.id = nanoid(6);
-            }
-            getTickets(res.tickets);
-          })
-          .catch(() => {
-            if (!stopFetching) {
-              fetchData();
-            }
-          });
+    let stopFetch = false;
+    let searchId: string;
+    setIsLoading(true);
+    const fetchData = async () => {
+      try {
+        if (searchId === undefined) {
+          const res = await aviasalesAPI.getSearchId();
+          searchId = res.searchId;
+        }
+        const partOfTickets = await aviasalesAPI.getTickets(searchId);
+        for (const ticket of partOfTickets.tickets) {
+          ticket.id = nanoid(6);
+        }
+        if (!stopFetch) getTickets(partOfTickets.tickets);
+        if (partOfTickets.stop) {
+          stopFetch = partOfTickets.stop;
+          setIsLoading(false);
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error.message);
       }
+      if (stopFetch) return;
+      await fetchData();
     };
     fetchData();
-  });
+  }, [aviasalesAPI, getTickets]);
 
   const sortTickets = (arr: ITicket[], fil: Filters, active: any) => {
-    let result: ITicket[];
+    const ticketsList = [...arr];
+
     if (active.cheap) {
-      result = arr.sort((first: ITicket, second: ITicket) => (first.price > second.price ? 1 : -1));
+      ticketsList.sort((first: ITicket, second: ITicket) => first.price - second.price);
     } else {
-      result = arr.sort((first: ITicket, second: ITicket) => (first.price < second.price ? 1 : -1));
+      ticketsList.sort(
+        (first: ITicket, second: ITicket) =>
+          first.segments[0].duration +
+          first.segments[1].duration -
+          (second.segments[0].duration + second.segments[1].duration),
+      );
     }
-    if (fil[FilterTypes.THREE].checked) {
-      return result.filter((el) => el.segments[0].stops.length <= 3 && el.segments[1].stops.length <= 3);
+
+    if (fil[FilterTypes.ALL].checked) {
+      return ticketsList;
     }
-    if (fil[FilterTypes.TWO].checked) {
-      return result.filter((el) => el.segments[0].stops.length <= 2 && el.segments[1].stops.length <= 2);
-    }
-    if (fil[FilterTypes.ONE].checked) {
-      return result.filter((el) => el.segments[0].stops.length <= 1 && el.segments[1].stops.length <= 1);
-    }
-    if (fil[FilterTypes.NOTHING].checked) {
-      return result.filter((el) => el.segments[0].stops.length === 0 && el.segments[1].stops.length === 0);
-    }
-    return result;
+
+    return ticketsList.filter(
+      (el) =>
+        ((fil[FilterTypes.THREE].checked && el.segments[0].stops.length === 3) ||
+          (fil[FilterTypes.TWO].checked && el.segments[0].stops.length === 2) ||
+          (fil[FilterTypes.ONE].checked && el.segments[0].stops.length === 1) ||
+          (fil[FilterTypes.NOTHING].checked && el.segments[0].stops.length === 0)) &&
+        ((fil[FilterTypes.THREE].checked && el.segments[1].stops.length === 3) ||
+          (fil[FilterTypes.TWO].checked && el.segments[1].stops.length === 2) ||
+          (fil[FilterTypes.ONE].checked && el.segments[1].stops.length === 1) ||
+          (fil[FilterTypes.NOTHING].checked && el.segments[1].stops.length === 0)),
+    );
   };
 
-  const tik = sortTickets(tickets, filters, activeTab);
+  const ticketsList = sortTickets(tickets, filters, activeTab);
 
   return (
-    <ul className={classes.cardList} style={{ listStyle: 'none', width: '100%', marginBottom: '20px' }}>
-      {tik.slice(0, ticketsToShow).map((ticket: ITicket) => (
-        <li key={ticket.id} style={{ marginTop: '20px' }}>
-          <Card ticket={ticket} />
-        </li>
-      ))}
-    </ul>
+    <>
+      {ticketsList.length ? (
+        <ul className={classes.cardList} style={{ listStyle: 'none', width: '100%', marginBottom: '20px' }}>
+          {isLoading && <Spiner />}
+          {ticketsList.slice(0, showCount).map((ticket: ITicket) => (
+            <li key={ticket.id} style={{ marginTop: '20px' }}>
+              <Card ticket={ticket} />
+            </li>
+          ))}
+          {ticketsList.length > ticketsToShow && (
+            <button type="button" className={classes.showMore} onClick={() => setShowCount(showCount + ticketsToShow)}>
+              Показать еще
+            </button>
+          )}
+        </ul>
+      ) : (
+        <h4 className={classes.empty}>Рейсов, подходящих под заданные фильтры, не найдено</h4>
+      )}
+    </>
   );
 };
 

@@ -1,0 +1,36 @@
+@import '../../../assets/scss/vars';
+.empty {
+  text-align: center;
+  color: gray;
+}
+
+.showMore {
+  display: flex;
+  margin: 20px auto;
+  padding: 10px 30px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  background: $blue;
+  color: $white;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
+
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      background-color: $white;
+      color: $blue;
+      border: 2px solid $blue;
+    }
+  }
+
+  &:focus {
+    outline: $blue;
+  }
+  &:focus-visible {
+    border: 2px solid #4a4af5;
+  }
+}
