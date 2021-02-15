@@ -4,7 +4,7 @@ import * as actions from '../../../actions/filters';
 import { IFilterProps, Filters } from '../../../helpers/types';
 import classes from './Filter.module.scss';
 
-const Filter = ({ filters, checkFunc }: IFilterProps) => (
+const Filter = ({ filters, makeFilterActive }: IFilterProps) => (
   <div className={classes.filter}>
     <h1 className={classes.filter__title}>Количество пересадок</h1>
 
@@ -12,7 +12,12 @@ const Filter = ({ filters, checkFunc }: IFilterProps) => (
       const { type, title, checked } = filters[filter];
       return (
         <label className={classes.item} key={title}>
-          <input className={classes.itemInput} type="checkbox" checked={checked} onChange={() => checkFunc(type)} />
+          <input
+            className={classes.itemInput}
+            type="checkbox"
+            checked={checked}
+            onChange={() => makeFilterActive(type)}
+          />
           <span className={classes.itemCheckmark} />
           <span className={classes.itemLabel}>{title}</span>
         </label>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { getHours, getMinutes, addMinutes } from 'date-fns';
 import { CardProps, ISegment } from '../../../helpers/types';
-import classes from './Card.module.scss';
+import classes from './Ticket.module.scss';
 
 const Card = ({ ticket }: CardProps) => {
   const {
@@ -32,7 +32,7 @@ const Card = ({ ticket }: CardProps) => {
     return `${startHour}:${startMinutes} - ${endHour}:${endMinutes}`;
   };
 
-  const getStopsCount = (length: number) => {
+  const getStopsCounts = (length: number) => {
     let str = `${length} `;
     if (length === 0) {
       str += 'пересадок';
@@ -55,7 +55,7 @@ const Card = ({ ticket }: CardProps) => {
         <span className={classes.cardRow__footer}>{timeConvert(type.duration)}</span>
       </div>
       <div className={classes.cardRow}>
-        <span className={classes.cardRow__header}>{getStopsCount(type.stops.length)}</span>
+        <span className={classes.cardRow__header}>{getStopsCounts(type.stops.length)}</span>
         <span className={classes.cardRow__footer}>{type.stops.join(' ')}</span>
       </div>
     </div>

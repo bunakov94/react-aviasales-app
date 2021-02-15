@@ -3,7 +3,7 @@ import 'focus-visible';
 import Header from './layout/Header';
 import Filter from './blocks/Filter';
 import Tabs from './blocks/Tabs';
-import CardList from './layout/CardList';
+import CardList from './layout/TicketsList';
 
 import './App.scss';
 

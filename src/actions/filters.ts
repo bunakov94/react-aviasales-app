@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/prefer-default-export
-export const checkFunc = (type: string) => ({ type });
+export const makeFilterActive = (type: string) => ({ type });

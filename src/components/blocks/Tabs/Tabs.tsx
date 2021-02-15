@@ -7,29 +7,29 @@ import classes from './Tabs.module.scss';
 const Tabs = ({ activeTab, setActiveTab }: ITabsProps) => (
   <div className={classes.tabs}>
     <input
-      id="radio1"
+      id="cheap"
       type="radio"
       className={classes.input}
       name="radio"
       value="Самый дешевый"
       aria-label="radio-button"
       checked={activeTab.cheap}
-      onChange={() => setActiveTab('SET_ACTIVE_TAB', { cheap: true, fast: false })}
+      onChange={() => setActiveTab({ cheap: true, fast: false })}
     />
-    <label htmlFor="radio1" className={classes.label}>
+    <label htmlFor="cheap" className={classes.label}>
       Самый дешевый
     </label>
     <input
-      id="radio2"
+      id="fast"
       type="radio"
       className={classes.input}
       name="radio"
       value="Самый быстрый"
       aria-label="radio-button"
       checked={activeTab.fast}
-      onChange={() => setActiveTab('SET_ACTIVE_TAB', { cheap: false, fast: true })}
+      onChange={() => setActiveTab({ cheap: false, fast: true })}
     />
-    <label htmlFor="radio2" className={classes.label}>
+    <label htmlFor="fast" className={classes.label}>
       Самый быстрый
     </label>
   </div>

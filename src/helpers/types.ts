@@ -28,12 +28,12 @@ export interface ICardListProps {
   getTickets: (payload: ITicket[]) => { type: string; payload: ITicket[] };
   tickets: ITicket[];
   filters: Filters;
-  activeTab: any;
+  activeTab: { [key: string]: boolean };
 }
 
 export interface IFilterProps {
   filters: Filters;
-  checkFunc: (type: string) => { type: string };
+  makeFilterActive: (type: string) => { type: string };
 }
 
 export interface CardProps {
@@ -41,12 +41,12 @@ export interface CardProps {
 }
 
 export interface ITabsProps {
-  activeTab: any;
-  setActiveTab: any;
+  activeTab: { [key: string]: boolean };
+  setActiveTab: (payload: { [key: string]: boolean }) => { type: string; payload: { [key: string]: boolean } };
 }
 
 export interface IState {
   filters: Filters;
   tickets: ITicket[];
-  activeTab: any;
+  activeTab: { [key: string]: boolean };
 }

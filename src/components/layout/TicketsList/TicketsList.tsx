@@ -5,8 +5,8 @@ import Spiner from '../../blocks/Loader';
 import AviasalesAPI from '../../../helpers/AviasalesAPI';
 import * as action from '../../../actions/tickets';
 import { ITicket, ICardListProps, IState, Filters, FilterTypes } from '../../../helpers/types';
-import classes from './CardList.module.scss';
-import Card from '../../blocks/Card';
+import classes from './TicketsList.module.scss';
+import Card from '../../blocks/Ticket';
 
 const CardList = ({ getTickets, tickets, filters, activeTab }: ICardListProps) => {
   const aviasalesAPI = useMemo(() => new AviasalesAPI(), []);
@@ -43,10 +43,14 @@ const CardList = ({ getTickets, tickets, filters, activeTab }: ICardListProps) =
     fetchData();
   }, [aviasalesAPI, getTickets]);
 
-  const sortTickets = (arr: ITicket[], fil: Filters, active: any) => {
-    const ticketsList = [...arr];
+  const makeTicketsList = (
+    ticketsArr: ITicket[],
+    filtersList: Filters,
+    currentActiveTab: { [key: string]: boolean },
+  ) => {
+    const ticketsList = [...ticketsArr];
 
-    if (active.cheap) {
+    if (currentActiveTab.cheap) {
       ticketsList.sort((first: ITicket, second: ITicket) => first.price - second.price);
     } else {
       ticketsList.sort(
@@ -57,24 +61,24 @@ const CardList = ({ getTickets, tickets, filters, activeTab }: ICardListProps) =
       );
     }
 
-    if (fil[FilterTypes.ALL].checked) {
+    if (filtersList[FilterTypes.ALL].checked) {
       return ticketsList;
     }
 
     return ticketsList.filter(
-      (el) =>
-        ((fil[FilterTypes.THREE].checked && el.segments[0].stops.length === 3) ||
-          (fil[FilterTypes.TWO].checked && el.segments[0].stops.length === 2) ||
-          (fil[FilterTypes.ONE].checked && el.segments[0].stops.length === 1) ||
-          (fil[FilterTypes.NOTHING].checked && el.segments[0].stops.length === 0)) &&
-        ((fil[FilterTypes.THREE].checked && el.segments[1].stops.length === 3) ||
-          (fil[FilterTypes.TWO].checked && el.segments[1].stops.length === 2) ||
-          (fil[FilterTypes.ONE].checked && el.segments[1].stops.length === 1) ||
-          (fil[FilterTypes.NOTHING].checked && el.segments[1].stops.length === 0)),
+      (ticket) =>
+        ((filtersList[FilterTypes.THREE].checked && ticket.segments[0].stops.length === 3) ||
+          (filtersList[FilterTypes.TWO].checked && ticket.segments[0].stops.length === 2) ||
+          (filtersList[FilterTypes.ONE].checked && ticket.segments[0].stops.length === 1) ||
+          (filtersList[FilterTypes.NOTHING].checked && ticket.segments[0].stops.length === 0)) &&
+        ((filtersList[FilterTypes.THREE].checked && ticket.segments[1].stops.length === 3) ||
+          (filtersList[FilterTypes.TWO].checked && ticket.segments[1].stops.length === 2) ||
+          (filtersList[FilterTypes.ONE].checked && ticket.segments[1].stops.length === 1) ||
+          (filtersList[FilterTypes.NOTHING].checked && ticket.segments[1].stops.length === 0)),
     );
   };
 
-  const ticketsList = sortTickets(tickets, filters, activeTab);
+  const ticketsList = makeTicketsList(tickets, filters, activeTab);
 
   return (
     <>
