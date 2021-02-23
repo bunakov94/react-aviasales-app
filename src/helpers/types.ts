@@ -24,8 +24,15 @@ export enum FilterTypes {
   THREE = 'THREE',
 }
 
+export enum StopsCount {
+  NOTHING = 0,
+  ONE = 1,
+  TWO = 2,
+  THREE = 3,
+}
+
 export interface ICardListProps {
-  getTickets: (payload: ITicket[]) => { type: string; payload: ITicket[] };
+  setTickets: (payload: ITicket[]) => { type: string; payload: ITicket[] };
   tickets: ITicket[];
   filters: Filters;
   activeTab: { [key: string]: boolean };

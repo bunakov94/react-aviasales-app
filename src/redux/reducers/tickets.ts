@@ -1,11 +1,12 @@
-import { ITicket } from '../helpers/types';
+import { ITicket } from '../../helpers/types';
+import ActionTypes from '../actionTypes';
 
 export default function tickets(state: ITicket[] = [], action: { type: string; payload: ITicket[] }) {
   switch (action.type) {
-    case 'SET_SEARCH_ID':
+    case ActionTypes.setSearchId:
       return action.payload;
 
-    case 'SET_TICKETS':
+    case ActionTypes.setTickets:
       return [...state, ...action.payload];
 
     default:

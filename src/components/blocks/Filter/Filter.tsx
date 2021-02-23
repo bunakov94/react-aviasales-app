@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../../actions/filters';
+import * as actions from '../../../redux/actions/filters';
 import { IFilterProps, Filters } from '../../../helpers/types';
 import classes from './Filter.module.scss';
 

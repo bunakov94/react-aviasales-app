@@ -1,4 +1,4 @@
-import { FilterTypes, Filters } from '../helpers/types';
+import { FilterTypes, Filters } from '../../helpers/types';
 
 const checkFunk = (state: Filters, type: string) => {
   const filtersCountExeptAll = Object.keys(state).length - 1;

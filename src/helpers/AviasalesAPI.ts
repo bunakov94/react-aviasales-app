@@ -1,4 +1,4 @@
-export default class AviasalesAPI {
+class AviasalesAPI {
   API_BASE_URL = 'https://front-test.beta.aviasales.ru/';
 
   API_ID_URL = 'search';
@@ -24,3 +24,7 @@ export default class AviasalesAPI {
     return this.getResources(`${this.API_SEARCH_TICKETS_URL}${searchId}`);
   }
 }
+
+const aviasalesAPI = new AviasalesAPI();
+
+export default aviasalesAPI;

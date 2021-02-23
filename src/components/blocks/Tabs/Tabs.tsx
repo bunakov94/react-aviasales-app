@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as action from '../../../actions/activeTab';
+import * as action from '../../../redux/actions/activeTab';
 import { ITabsProps } from '../../../helpers/types';
 import classes from './Tabs.module.scss';
 
