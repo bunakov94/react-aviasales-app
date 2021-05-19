@@ -35,7 +35,7 @@ const Tabs = ({ activeTab, setActiveTab }: ITabsProps) => (
   </div>
 );
 
-const mapStateToProps = (state: { activeTab: { [key: string]: boolean } }) => ({
+const mapStateToProps = (state: { activeTab: { cheap: boolean; fast: boolean } }) => ({
   activeTab: state.activeTab,
 });
 
